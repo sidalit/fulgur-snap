@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Fulgur
+Comment=Edit text, Markdown and remote files
+Exec=fulgur %F
+Icon=${SNAP}/meta/gui/fulgur.png
+Terminal=false
+Type=Application
+Categories=Utility;TextEditor;
+MimeType=text/plain;text/markdown;text/csv;application/json;application/xml;application/toml;
+StartupWMClass=fulgur_fulgur

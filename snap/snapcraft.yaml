@@ -1,0 +1,85 @@
+name: fulgur
+base: core26
+version: '0.14.1'
+title: Fulgur
+icon: snap/gui/fulgur.png
+summary: A fast text editor with themes and encrypted synchronization
+description: |
+  Fulgur is a native text editor with syntax highlighting, Markdown and CSV
+  previews, customizable themes and remote file editing over SSH/SFTP.
+  Work offline or share encrypted files between devices using a Fulgurant
+  synchronization server.
+license: Apache-2.0
+grade: stable
+confinement: strict
+website: https://fulgur.app
+source-code:
+  - https://github.com/fulgur-app/Fulgur
+  - https://github.com/sidalit/fulgur-snap
+issues:
+  - https://github.com/fulgur-app/Fulgur/issues
+  - https://github.com/sidalit/fulgur-snap/issues
+contact: https://github.com/sidalit/fulgur-snap/issues
+
+platforms:
+  amd64:
+  arm64:
+
+apps:
+  fulgur:
+    command: bin/Fulgur
+    extensions: [gnome]
+    plugs:
+      - home
+      - network
+      - network-bind
+      - password-manager-service
+      - removable-media
+      - ssh-keys
+    environment:
+      PATH: $SNAP/bin:$SNAP/usr/bin:$PATH
+
+parts:
+  fulgur:
+    plugin: rust
+    source: https://github.com/fulgur-app/Fulgur.git
+    source-tag: v$SNAPCRAFT_PROJECT_VERSION
+    source-depth: 1
+    rust-channel: '1.98.1'
+    after: [cargo-about]
+    build-packages:
+      - build-essential
+      - clang
+      - cmake
+      - mold
+      - pkg-config
+      - libdbus-1-dev
+      - libfontconfig-dev
+      - libfreetype-dev
+      - libssl-dev
+      - libxcb-render0-dev
+      - libxcb-shape0-dev
+      - libxcb-xfixes0-dev
+      - libxkbcommon-dev
+      - libxkbcommon-x11-dev
+    stage-packages:
+      - libxkbcommon-x11-0
+    override-pull: |
+      craftctl default
+      sed -i 's/"app.fulgur.fulgur"/"fulgur_fulgur"/' src/main.rs
+    override-build: |
+      craftctl default
+      cargo about generate licenses/about.hbs -c licenses/about.toml --workspace -o THIRD-PARTY-LICENSES
+      install -Dm644 LICENCE "$CRAFT_PART_INSTALL/usr/share/doc/fulgur/LICENCE"
+      install -Dm644 THIRD-PARTY-LICENSES "$CRAFT_PART_INSTALL/usr/share/doc/fulgur/THIRD-PARTY-LICENSES"
+      install -Dm644 "$CRAFT_PROJECT_DIR/snap/gui/fulgur.png" \
+        "$CRAFT_PART_INSTALL/usr/share/icons/hicolor/256x256/apps/fulgur_fulgur.png"
+
+  cargo-about:
+    plugin: rust
+    source: https://github.com/EmbarkStudios/cargo-about.git
+    source-tag: '0.9.3'
+    source-depth: 1
+    rust-channel: '1.98.1'
+    rust-features: [cli]
+    prime: ['-*']
