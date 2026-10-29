@@ -47,6 +47,8 @@ parts:
     source-depth: 1
     rust-channel: '1.98.1'
     after: [cargo-about]
+    build-environment:
+      - OPENSSL_NO_VENDOR: '1'
     build-packages:
       - build-essential
       - clang
