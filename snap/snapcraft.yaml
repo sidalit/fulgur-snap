@@ -66,16 +66,13 @@ parts:
       - libxkbcommon-x11-dev
     stage-packages:
       - libxkbcommon-x11-0
-    override-pull: |
-      craftctl default
-      sed -i 's/"app.fulgur.fulgur"/"fulgur_fulgur"/' src/main.rs
     override-build: |
       craftctl default
       cargo about generate licenses/about.hbs -c licenses/about.toml --workspace -o THIRD-PARTY-LICENSES
       install -Dm644 LICENCE "$CRAFT_PART_INSTALL/usr/share/doc/fulgur/LICENCE"
       install -Dm644 THIRD-PARTY-LICENSES "$CRAFT_PART_INSTALL/usr/share/doc/fulgur/THIRD-PARTY-LICENSES"
       install -Dm644 "$CRAFT_PROJECT_DIR/snap/gui/fulgur.png" \
-        "$CRAFT_PART_INSTALL/usr/share/icons/hicolor/256x256/apps/fulgur_fulgur.png"
+        "$CRAFT_PART_INSTALL/usr/share/icons/hicolor/256x256/apps/app.fulgur.fulgur.png"
 
   cargo-about:
     plugin: rust

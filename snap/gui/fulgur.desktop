@@ -7,4 +7,4 @@ Terminal=false
 Type=Application
 Categories=Utility;TextEditor;
 MimeType=text/plain;text/markdown;text/csv;application/json;application/xml;application/toml;
-StartupWMClass=fulgur_fulgur
+StartupWMClass=Fulgur
