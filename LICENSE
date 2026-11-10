@@ -22,4 +22,4 @@ SOFTWARE.
 
 This license covers only the snap packaging files in this repository.
 Fulgur, its dependencies and the base snap keep their own licenses.
-The upstream Fulgur icon and upstream code in patches are not covered by this packaging license.
+The upstream Fulgur icon is not covered by this packaging license.
