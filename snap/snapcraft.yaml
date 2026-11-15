@@ -45,7 +45,7 @@ parts:
     source: https://github.com/fulgur-app/Fulgur.git
     source-tag: v$SNAPCRAFT_PROJECT_VERSION
     source-depth: 1
-    rust-channel: '1.98.1'
+    rust-channel: stable
     after: [cargo-about]
     build-environment:
       - OPENSSL_NO_VENDOR: '1'
@@ -79,6 +79,6 @@ parts:
     source: https://github.com/EmbarkStudios/cargo-about.git
     source-tag: '0.9.3'
     source-depth: 1
-    rust-channel: '1.98.1'
+    rust-channel: stable
     rust-features: [cli]
     prime: ['-*']
