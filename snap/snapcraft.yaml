@@ -1,6 +1,6 @@
 name: fulgur
 base: core26
-version: '0.14.1'
+version: '0.15.0'
 title: Fulgur
 icon: snap/gui/fulgur.png
 summary: A fast text editor with themes and encrypted synchronization
